@@ -20,13 +20,11 @@ router.post("/signin", async (req, res) => {
             }
         });
         if (findUser) {
-            const validPassword = bcrypt.compare(
-                password,
-                findUser.password,
-                function(err, res) {
+            const validPassword = bcrypt
+                .compare(password, findUser.password)
+                .then(function(err, res) {
                     return res;
-                }
-            );
+                });
 
             if (validPassword) {
                 res.status(200).send({
